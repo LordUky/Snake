@@ -1,9 +1,9 @@
 import pygame, sys, time, random
 
 pygame.init()
-pygame.mixer.music.load('bg.mp3')#导入背景音乐
-pygame.mixer.music.set_volume(0.1) #音量
-pygame.mixer.music.play(loops=-1)#循环播放
+pygame.mixer.music.load('bg.mp3')#import bgm
+pygame.mixer.music.set_volume(0.1) #volume
+pygame.mixer.music.play(loops=-1)#loop
 img, dr, lt, dic1, dic2, = pygame.display.set_mode((1024, 600)), 1, [[512, 300], [492, 300], [472, 300], [452, 300]], {1: 0, 2: 1, 3: 0, 4: 1}, {1: 20, 2: 20, 3: -20, 4: -20} #dr: 右下左上 → 1234
 pygame.display.set_caption('image')
 img.fill((0, 0, 0))
@@ -43,7 +43,7 @@ while True:
         t *= 1
         img=pygame.display.set_mode((1024, 600))
         img.fill((0, 0, 0))
-        str = pygame.key.get_pressed()#检测键盘
+        str = pygame.key.get_pressed()#get keyboard pressed info
         if len(lt) != len(set(map(tuple, lt))) or len(lt) == 0:
             time.sleep(0.7)
             font = pygame.font.SysFont('microsoft Yahei', 50)
@@ -59,7 +59,7 @@ while True:
             u1 = time.time()
             break
         temp = lt[-1][:]
-        if str[pygame.K_RIGHT] and dr != 1 and dr != 3:#str[]如果被按下了返回值为1
+        if str[pygame.K_RIGHT] and dr != 1 and dr != 3:#str[]return 1 if corresponding key is currently pressed
             dr = 1
         elif str[pygame.K_DOWN] and dr != 2 and dr != 4:
             dr = 2
@@ -67,7 +67,7 @@ while True:
             dr = 3
         elif str[pygame.K_UP] and dr != 2 and dr != 4:
             dr = 4
-        elif str[pygame.K_ESCAPE]:#如果按下esc就退出
+        elif str[pygame.K_ESCAPE]:#exit if esc is pressed
             pygame.quit()
         time.sleep(t - 1)
         move(dr)
@@ -110,4 +110,4 @@ while True:
         pygame.draw.rect(img, (255, 255, 255), (r, s, 20, 20))
         pygame.draw.rect(img, (255, 255, 255), (p, q, 20, 20))
         pygame.display.update()
-        time.sleep(0.03)#隔多少秒刷新一次
+        time.sleep(0.03)#refresh
